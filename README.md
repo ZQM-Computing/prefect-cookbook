@@ -1,0 +1,67 @@
+# Prefect Cookbook
+
+<!-- ZQM-START -->
+<!-- markdownlint-disable MD033 -->
+<p align="center">
+  <strong>ZQM Computing — Geospatial Engineering & Scientific Computing</strong><br>
+  <a href="https://github.com/ZQM-Computing">ZQM Computing</a>
+</p>
+<!-- markdownlint-enable MD033 -->
+<!-- ZQM-END -->
+
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
+A **Prefect cookbook** for workflow orchestration, schedules, and deployments. Patterns are drawn from the ZQM fleet's Prefect 3.9.0 installs (Node-1 on port 4300, Node-3 on port 4200) and its scheduled dlt flow. It is intended for Data engineers who orchestrate geospatial pipelines with retries and schedules. Validate each pattern against your own data, software versions, and operating environment before adopting it.
+
+## Repository role and status
+
+**Status:** Active, public — seeding. Pattern passes land in follow-up work from fleet-verified setups; the tables below list what is planned, not what is already written.
+
+**What this repository is:** Prefect patterns — see the table below.
+
+**What it contributes:** Part of the ZQM Computing geospatial portfolio. The umbrella index for the series is [geospatial-cookbooks](https://github.com/ZQM-Computing/geospatial-cookbooks).
+
+**Standing:** This repository is maintained independently. Automated checks cover only the paths and environments configured in its workflows; they do not establish production readiness or operational certification.
+
+## Who this is for
+
+Data engineers who orchestrate geospatial pipelines with retries and schedules.
+
+## Prerequisites
+
+- Prefect 3.9.0
+- Python 3.11+
+- Postgres or DuckDB as a flow destination (see dlt-cookbook)
+
+## Patterns (planned)
+
+| # | Example | What it will demonstrate |
+|---|---------|--------------------------|
+| 01 | `01-first-flow` | Writing and running a first flow with retries |
+| 02 | `02-schedules` | Scheduled flows and cron-style triggers |
+| 03 | `03-deployments` | Deploying flows as services with work pools |
+| 04 | `04-dlt-flow` | A Prefect-scheduled dlt pipeline, as run on the fleet |
+
+## Repository layout
+
+```text
+prefect-cookbook/
+├── examples/          # pattern passes, landing in follow-up work
+├── README.md
+└── LICENSE
+```
+
+## Roadmap
+
+- First pattern pass: the first two table rows
+- Second pass: the remaining rows, from fleet-verified setups
+
+## Contributing
+
+A contributing guide lands with the first pattern pass. Report security issues to <zqmcomputing@gmail.com> — please do not open a public issue for those.
+
+## More from this series
+
+- [dlt-cookbook](https://github.com/ZQM-Computing/dlt-cookbook) — ELT pipelines from Python into Postgres and DuckDB
+- [nifi-cookbook](https://github.com/ZQM-Computing/nifi-cookbook) — Visual dataflow and ingestion pipelines
+- [dbt-cookbook](https://github.com/ZQM-Computing/dbt-cookbook) — SQL transformations and tests on warehouse tables

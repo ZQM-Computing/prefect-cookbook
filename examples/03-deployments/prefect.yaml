@@ -1,0 +1,21 @@
+# Prefect deployment sketch — DESIGN-ONLY, not a verbatim Prefect 3.9.0 file.
+# Confirm the exact schema with `prefect deploy` on 3.9.0 at validation.
+#
+# Fleet-verified rule (Prefect 3.9 local process-pool deploys):
+#   the entrypoint MUST use the real EntrypointType.MODULE_PATH enum.
+#   The string form of the entrypoint and push=False both fail.
+#   A deployment created any other way is not the pattern.
+name: service-deployment
+prefect-version: 3.9.0
+build: null
+push: null
+pull:
+  - prefect.deployments.steps.set_working_directory:
+      directory: /path/to/your/project
+work_pool:
+  name: default-pool
+  type: process
+deployments:
+  - name: service-deployment
+    entrypoint: your_package.flows:service_flow
+    entrypoint_type: MODULE_PATH

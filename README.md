@@ -15,7 +15,7 @@ A **Prefect cookbook** for workflow orchestration, schedules, and deployments. P
 
 ## Repository role and status
 
-**Status:** Active, public — seeding. Pattern passes land in follow-up work from fleet-verified setups; the tables below list what is planned, not what is already written.
+**Status:** Active, public — first pattern pass written (design-only, gate 1 target; runtime validation pending). The table below lists what is written; no pattern has been runtime-validated yet.
 
 **What this repository is:** Prefect patterns — see the table below.
 
@@ -33,14 +33,14 @@ Data engineers who orchestrate geospatial pipelines with retries and schedules.
 - Python 3.11+
 - Postgres or DuckDB as a flow destination (see dlt-cookbook)
 
-## Patterns (planned)
+## Patterns
 
-| # | Example | What it will demonstrate |
-|---|---------|--------------------------|
-| 01 | `01-first-flow` | Writing and running a first flow with retries |
-| 02 | `02-schedules` | Scheduled flows and cron-style triggers |
-| 03 | `03-deployments` | Deploying flows as services with work pools |
-| 04 | `04-dlt-flow` | A Prefect-scheduled dlt pipeline, as run on the fleet |
+| # | Example | Status | What it demonstrates |
+|---|---------|--------|----------------------|
+| 01 | [01-first-flow](examples/01-first-flow/README.md) | Written (design-only) | Writing and running a first flow with retries |
+| 02 | [02-schedules](examples/02-schedules/README.md) | Written (design-only) | Scheduled flows and cron-style triggers |
+| 03 | [03-deployments](examples/03-deployments/README.md) | Written (design-only) | Deploying flows as services with work pools |
+| 04 | [04-dlt-flow](examples/04-dlt-flow/README.md) | Written (design-only) | A Prefect-scheduled dlt pipeline, as run on the fleet |
 
 ## Repository layout
 

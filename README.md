@@ -15,7 +15,7 @@ A **Prefect cookbook** for workflow orchestration, schedules, and deployments. P
 
 ## Repository role and status
 
-**Status:** Active, public — first pattern pass written (design-only, gate 1 target; runtime validation pending). The table below lists what is written; no pattern has been runtime-validated yet.
+**Status:** Active, public. Patterns 01–03 remain design-only. Pattern 04 has a passing exact-head CI runtime contract for its synthetic Prefect + dlt + local DuckDB path; this does not validate worker deployment, Postgres, or production fleet behavior.
 
 **What this repository is:** Prefect patterns — see the table below.
 
@@ -40,7 +40,7 @@ Data engineers who orchestrate geospatial pipelines with retries and schedules.
 | 01 | [01-first-flow](examples/01-first-flow/README.md) | Written (design-only) | Writing and running a first flow with retries |
 | 02 | [02-schedules](examples/02-schedules/README.md) | Written (design-only) | Scheduled flows and cron-style triggers |
 | 03 | [03-deployments](examples/03-deployments/README.md) | Written (design-only) | Deploying flows as services with work pools |
-| 04 | [04-dlt-flow](examples/04-dlt-flow/README.md) | Written (design-only) | A Prefect-scheduled dlt pipeline, as run on the fleet |
+| 04 | [04-dlt-flow](examples/04-dlt-flow/README.md) | Runtime-tested in CI (local DuckDB only) | A Prefect-scheduled dlt pipeline over synthetic data with destination-count and repeat-run assertions |
 
 ## Repository layout
 

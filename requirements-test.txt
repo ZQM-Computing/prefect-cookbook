@@ -1,0 +1,6 @@
+# Python 3.11 CI/runtime contract for the local synthetic example.
+# Prefect follows the version recorded in the ZQM fleet seed.
+prefect==3.9.0
+# Bound dlt to the current major line; CI logs record the exact resolved version.
+dlt[duckdb]>=1.0,<2
+pytest>=8,<9

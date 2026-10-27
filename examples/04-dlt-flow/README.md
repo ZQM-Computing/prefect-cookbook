@@ -1,9 +1,11 @@
 # 04 — dlt Flow: A Prefect-Scheduled dlt Pipeline
 
-**Design-only — gate 1 target. Not runtime-validated.** This pattern wraps a
-dlt pipeline in a Prefect flow: extract synthetic records, load them to a
-destination, and report the row count as the flow's result. It mirrors the
-fleet's Prefect-scheduled dlt flow shape without copying its data.
+**Runtime-tested in CI — local contract only.** This pattern wraps a dlt
+pipeline in a Prefect flow, loads synthetic records to a local DuckDB destination,
+and reports a row count queried from that destination. The exact-head CI run
+passed on Python 3.11; its log records the resolved Prefect, dlt, and DuckDB
+versions. This validates the synthetic local path only, not a worker deployment,
+Postgres destination, or production fleet.
 
 ## Prerequisites
 
@@ -59,4 +61,4 @@ python -m pytest -q
 - Prefect is bounded to the fleet-seed version `3.9.0`; dlt is constrained to the current major line (`>=1.0,<2`) in `requirements-test.txt`.
 - CI prints the exact resolved Prefect, dlt, and DuckDB versions for each run; review that log before treating a specific combination as validated.
 - The test uses a local DuckDB file and explicit replace disposition. It does not validate a Postgres destination or production worker deployment.
-- Status remains design-only until the exact-head runtime test workflow passes.
+- This local synthetic DuckDB path is runtime-tested by CI. The Prefect worker, Postgres destination, fleet deployment, and production behavior remain unverified.

@@ -52,13 +52,13 @@ python -m pytest -q
   time, even if the submitting shell has dlt. The worker environment is the
   flow environment (pattern 03).
 
-## Versions note / fleet grounding / to confirm at validation
+## Validated runtime versions and fleet grounding
 
 - Fleet evidence (shape only, not expected output): the fleet runs a
   Prefect-scheduled dlt flow (Node-3, 59 rows in its demo) and a standalone
   `dlt_demo` (Node-1, 191 rows kept). This pattern's 20-row synthetic source
   is its own example; its count gate is 20, not 59 or 191.
-- Prefect is bounded to the fleet-seed version `3.9.0`; dlt is constrained to the current major line (`>=1.0,<2`) in `requirements-test.txt`.
-- CI prints the exact resolved Prefect, dlt, and DuckDB versions for each run; review that log before treating a specific combination as validated.
+- The passing Linux CI run on commit `b0e9df807d21127f7d8f68e21c612afb636407bf` recorded Python `3.11.17`, Prefect `3.9.0`, dlt `1.31.0`, and DuckDB `2.0.0`.
+- `requirements-test.txt` pins Prefect, dlt, and DuckDB to that verified combination; update these pins only after the runtime contract passes again.
 - The test uses a local DuckDB file and explicit replace disposition. It does not validate a Postgres destination or production worker deployment.
 - This local synthetic DuckDB path is runtime-tested by CI. The Prefect worker, Postgres destination, fleet deployment, and production behavior remain unverified.

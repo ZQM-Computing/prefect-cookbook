@@ -46,15 +46,31 @@ Data engineers who orchestrate geospatial pipelines with retries and schedules.
 
 ```text
 prefect-cookbook/
-├── examples/          # pattern passes, landing in follow-up work
+├── .github/workflows/dlt-example.yml  # isolated synthetic runtime contract
+├── examples/
+│   └── 04-dlt-flow/                   # Prefect + dlt + local DuckDB example
+├── tests/test_dlt_flow.py             # destination count and repeat-run assertions
+├── requirements-test.txt              # bounded test/runtime dependencies
 ├── README.md
 └── LICENSE
 ```
+
+## Validation
+
+Run the bounded local runtime contract from the repository root:
+
+```bash
+python -m pip install -r requirements-test.txt
+python -m pytest -q
+```
+
+The test uses synthetic rows and a temporary local DuckDB file. CI prints the exact resolved Prefect, dlt, and DuckDB versions. A passing run validates this local example on that runner only; it does not validate a Prefect server, worker deployment, Postgres destination, production fleet, or scheduled production flow.
 
 ## Roadmap
 
 - First pattern pass: the first two table rows
 - Second pass: the remaining rows, from fleet-verified setups
+- Extend runtime tests to the other patterns only when their prerequisites and expected behavior are explicit
 
 ## Contributing
 

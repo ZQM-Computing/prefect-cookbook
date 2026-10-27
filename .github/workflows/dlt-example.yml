@@ -19,6 +19,10 @@ jobs:
     name: Runtime-test synthetic dlt flow
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      # Avoid a noisy informational Prefect shutdown log during pytest teardown.
+      # Warnings and errors remain visible.
+      PREFECT_LOGGING_LEVEL: WARNING
     steps:
       - name: Check out repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7

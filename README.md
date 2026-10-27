@@ -64,7 +64,7 @@ python -m pip install -r requirements-test.txt
 python -m pytest -q
 ```
 
-The test uses synthetic rows and a temporary local DuckDB file. CI prints the exact resolved Prefect, dlt, and DuckDB versions. A passing run validates this local example on that runner only; it does not validate a Prefect server, worker deployment, Postgres destination, production fleet, or scheduled production flow.
+The test uses synthetic rows and a temporary local DuckDB file. The verified CI combination is Python `3.11.17`, Prefect `3.9.0`, dlt `1.31.0`, and DuckDB `2.0.0`, pinned in `requirements-test.txt`. A passing run validates this local example on that runner only; it does not validate a Prefect server, worker deployment, Postgres destination, production fleet, or scheduled production flow.
 
 ## Roadmap
 

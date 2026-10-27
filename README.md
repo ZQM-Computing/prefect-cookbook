@@ -15,7 +15,7 @@ A **Prefect cookbook** for workflow orchestration, schedules, and deployments. P
 
 ## Repository role and status
 
-**Status:** Active, public — first pattern pass written (design-only, gate 1 target; runtime validation pending). The table below lists what is written; no pattern has been runtime-validated yet.
+**Status:** Active, public. Patterns 01–03 remain design-only. Pattern 04 has a passing exact-head CI runtime contract for its synthetic Prefect + dlt + local DuckDB path; this does not validate worker deployment, Postgres, or production fleet behavior.
 
 **What this repository is:** Prefect patterns — see the table below.
 
@@ -40,21 +40,37 @@ Data engineers who orchestrate geospatial pipelines with retries and schedules.
 | 01 | [01-first-flow](examples/01-first-flow/README.md) | Written (design-only) | Writing and running a first flow with retries |
 | 02 | [02-schedules](examples/02-schedules/README.md) | Written (design-only) | Scheduled flows and cron-style triggers |
 | 03 | [03-deployments](examples/03-deployments/README.md) | Written (design-only) | Deploying flows as services with work pools |
-| 04 | [04-dlt-flow](examples/04-dlt-flow/README.md) | Written (design-only) | A Prefect-scheduled dlt pipeline, as run on the fleet |
+| 04 | [04-dlt-flow](examples/04-dlt-flow/README.md) | Runtime-tested in CI (local DuckDB only) | A Prefect-scheduled dlt pipeline over synthetic data with destination-count and repeat-run assertions |
 
 ## Repository layout
 
 ```text
 prefect-cookbook/
-├── examples/          # pattern passes, landing in follow-up work
+├── .github/workflows/dlt-example.yml  # isolated synthetic runtime contract
+├── examples/
+│   └── 04-dlt-flow/                   # Prefect + dlt + local DuckDB example
+├── tests/test_dlt_flow.py             # destination count and repeat-run assertions
+├── requirements-test.txt              # bounded test/runtime dependencies
 ├── README.md
 └── LICENSE
 ```
+
+## Validation
+
+Run the bounded local runtime contract from the repository root:
+
+```bash
+python -m pip install -r requirements-test.txt
+python -m pytest -q
+```
+
+The test uses synthetic rows and a temporary local DuckDB file. CI prints the exact resolved Prefect, dlt, and DuckDB versions. A passing run validates this local example on that runner only; it does not validate a Prefect server, worker deployment, Postgres destination, production fleet, or scheduled production flow.
 
 ## Roadmap
 
 - First pattern pass: the first two table rows
 - Second pass: the remaining rows, from fleet-verified setups
+- Extend runtime tests to the other patterns only when their prerequisites and expected behavior are explicit
 
 ## Contributing
 

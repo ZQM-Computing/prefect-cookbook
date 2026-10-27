@@ -8,9 +8,10 @@ fleet's Prefect-scheduled dlt flow shape without copying its data.
 ## Prerequisites
 
 - Prefect 3.9.0
-- Python 3.11+, dlt installed in the flow's environment
-- A destination: DuckDB (local file) or Postgres (see dlt-cookbook)
-- Bash
+- Python 3.11
+- Dependencies from the repository's bounded `requirements-test.txt`
+- Local filesystem access for the DuckDB database file
+- This example implements DuckDB only; Postgres is a separate destination pattern, not a configured option here
 
 ## Files
 
@@ -19,18 +20,23 @@ fleet's Prefect-scheduled dlt flow shape without copying its data.
 ## Steps
 
 ```bash
-python3 dlt_flow.py
+python -m pip install -r requirements-test.txt
+python examples/04-dlt-flow/dlt_flow.py
+```
+
+Run the repeatability and destination assertions with:
+
+```bash
+python -m pytest -q
 ```
 
 ## Expected output
 
 - The pipeline loads the synthetic records (20 rows in the example source)
   into the destination table.
-- The flow result reports the loaded row count (20), matching the source
-  count — the count check is the pattern's correctness gate.
-- A second run replaces or appends per the pipeline's write disposition
-  (stated in the file), and the count check accounts for it — a count that
-  silently doubles across runs is a disposition bug, not a success.
+- The flow queries the actual destination table and returns the observed row count (20); a mismatch raises an error.
+- The pipeline explicitly uses `write_disposition="replace"`.
+- The automated contract test runs the flow twice and independently queries the local DuckDB file to assert 20 rows, 20 distinct IDs, and the expected ID range. This guards against a silent doubling on repeat runs.
 
 ## Failure behavior
 
@@ -50,8 +56,7 @@ python3 dlt_flow.py
   Prefect-scheduled dlt flow (Node-3, 59 rows in its demo) and a standalone
   `dlt_demo` (Node-1, 191 rows kept). This pattern's 20-row synthetic source
   is its own example; its count gate is 20, not 59 or 191.
-- Prefect 3.9.0 per the fleet seed; dlt version to confirm at validation
-  (the fleet's dlt version is not pinned in the seed — record it at
-  validation, do not guess it here).
-- The destination used at validation (DuckDB file vs Postgres) and the
-  write disposition spelling.
+- Prefect is bounded to the fleet-seed version `3.9.0`; dlt is constrained to the current major line (`>=1.0,<2`) in `requirements-test.txt`.
+- CI prints the exact resolved Prefect, dlt, and DuckDB versions for each run; review that log before treating a specific combination as validated.
+- The test uses a local DuckDB file and explicit replace disposition. It does not validate a Postgres destination or production worker deployment.
+- Status remains design-only until the exact-head runtime test workflow passes.

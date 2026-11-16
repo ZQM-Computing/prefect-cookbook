@@ -11,7 +11,7 @@
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-A **Prefect cookbook** for workflow orchestration, schedules, and deployments. Patterns are drawn from the ZQM fleet's Prefect 3.9.0 installs (Node-1 on port 4300, Node-3 on port 4200) and its scheduled dlt flow. It is intended for Data engineers who orchestrate geospatial pipelines with retries and schedules. Validate each pattern against your own data, software versions, and operating environment before adopting it.
+A **Prefect cookbook** for workflow orchestration, schedules, and deployments. Patterns are drawn from the ZQM fleet's Prefect 3.9.0 installs (Node-1 on port 4300, Node-3 on port 4200) (as of Oct 2026; verify against the current fleet) and its scheduled dlt flow. It is intended for Data engineers who orchestrate geospatial pipelines with retries and schedules. Validate each pattern against your own data, software versions, and operating environment before adopting it.
 
 ## Repository role and status
 

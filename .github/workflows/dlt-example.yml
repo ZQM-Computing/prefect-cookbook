@@ -17,7 +17,7 @@ concurrency:
 jobs:
   test:
     name: Runtime-test synthetic dlt flow
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, X64, zqm-linux]
     timeout-minutes: 15
     env:
       # Avoid a noisy informational Prefect shutdown log during pytest teardown.
